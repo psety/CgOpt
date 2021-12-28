@@ -1,0 +1,24 @@
+git --version
+git config --global user.name "Name Surname"
+git config --global user.email "EmailAddress"
+git config --list
+
+git status
+git add -A  
+git commit -m "Commit Changes Explained Here"
+
+git diff --> differences after changes in repo
+
+-- After commit. this is still local repo.--
+
+git pull origin master --> Check any changes while we are working. 
+git push origin master --> Then Push the files 
+
+-- branch 
+
+git branch branch-name
+-- change from master to branch 
+git checkout branch-name
+git branch -a -- list branches and * is the working branch
+
+git remote set-url origin https://{github-username}:{token}@{git-url}
