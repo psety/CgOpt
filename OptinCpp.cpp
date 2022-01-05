@@ -1,7 +1,7 @@
 /*
  * Opt.py may be [certainly it is!] slow because of the complexity of the inner and inner for loops. 
  * Now the Algorithm Optimization is not considered. 
- * dat to csv web page: https://mypages.iit.edu/~aiaa/dat2csv ---> hilarious!! [Saved me to code python code]
+ * dat to csv web page: https://mypages.iit.edu/~aiaa/dat2csv ---> hilarious!! [Saved me for the future]
  */
 #include <iostream>
 #include <vector>
@@ -9,8 +9,8 @@
 int main()
 {
     
-    int tot_sayac = 0;
-    int ss_sayac = 0;
+    int tot_count = 0;
+    int ss_count = 0;
     // All metrics are mm.
     // Variables which are 
 
@@ -48,12 +48,12 @@ int main()
                 float totalSolar_w = Sol_x * Sol_y;
                 
                 //std::cout << " Wy: " << wing_Yin;
-                for(float tail_Xin = solar_panel_x; tail_Xin <= 3*chord ; tail_Xin = tail_Xin + solar_panel_x)          // FOR-XTAIL
+                for(float tail_Xin = solar_panel_x; tail_Xin <= 2*solar_panel_x ; tail_Xin = tail_Xin + solar_panel_x)          // FOR-XTAIL
                 {
                     float tail_chord = tail_Xin * hinge;
                     //std::cout << " Tx: " << tail_Xin;
 
-                    for (float tail_Yin = solar_panel_y; tail_Yin <= 3 * chord; tail_Yin = tail_Yin + solar_panel_y)    // FOR-YTAIL
+                    for (float tail_Yin = solar_panel_y; tail_Yin <= 3*tail_Xin; tail_Yin = tail_Yin + solar_panel_y)    // FOR-YTAIL
                     {
                         float totalSolar_t = (tail_Xin / solar_panel_x)*(tail_Yin/solar_panel_y);
                         float totalSolar = totalSolar_w + totalSolar_t;
@@ -75,22 +75,22 @@ int main()
                             float G_ele = 1500;
                             float G_add = 76;
                             float G_nose = 100;
-                            float G_wing = ((wing_Xin * wing_Yin)/10000)*0.6;
-                            float G_tail = ((tail_Xin * tail_Yin)/10000)*0.6;
+                            float G_wing = ((wing_Xin * wing_Yin)/10000)*25;
+                            float G_tail = ((tail_Xin * tail_Yin)/10000)*25;
                             float G_rud = 100;
 
                             float G_all = G_ele+G_nose+G_wing+G_mot+G_tail+G_rud;
 
                             float Xcg = (Xele*G_ele + Xnose*G_nose + Xwing * G_wing + Xmot*G_mot + Xtail*G_tail + Xrud*G_rud)/G_all;
                             //std::cout << "Xcg: " << Xcg << std::endl;
-                            tot_sayac++;
+                            tot_count++;
                             float Xac = chord * 0.25;
                             float ss = Xcg - Xac;
                             //std::cout << "ss: " << ss << std::endl;
                             if (ss < 0)
                             {
-                                std::cout <<"ss: " << ss << " Xw: " << wing_Xin << " Yw: " << wing_Yin << " Xt: " << tail_Xin << " Yt: " << tail_Yin << " lt: " << Xcg-Xtail <<" Mass: " << G_all << std::endl;
-                                ss_sayac++;
+                                std::cout <<"ss: " << ss << " Xw: " << wing_Xin << " Yw: " << wing_Yin << " Xt: " << tail_Xin << " Yt: " << tail_Yin << " lt: " << Xcg-Xtail <<" Mass: " << G_all <<" Gwing: "<<G_wing <<" Gtail: "<< G_tail << " chord: "<< chord<< std::endl;
+                                ss_count++;
                             }
                         }
                     }
@@ -99,7 +99,7 @@ int main()
         }
     }
 
-    std::cout << "Total Counter: " << tot_sayac <<  std::endl;
-    std::cout << "SS Counter: " << ss_sayac <<  std::endl;
+    std::cout << "Total Counter: " << tot_count <<  std::endl;
+    std::cout << "SS Counter: " << ss_count <<  std::endl;
     return 0;
 }
