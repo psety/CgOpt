@@ -5,6 +5,13 @@
  */
 #include <iostream>
 #include <vector>
+#include <math.h>
+#include <Eigen/Dense>
+
+float d2r(float degrees)                    // the function may be saved in an .h file later... 
+{
+    return degrees*M_PI/180;
+}
 
 int main()
 {
@@ -29,7 +36,7 @@ int main()
     float i_t_range_max = 30;                     // i_t max
     float hinge         = 10.0/7.0;
 
-    for (float nose_in = 200; nose_in <= nose_range; nose_in = nose_in + 100)                                           // FOR-NOSE
+    for (float nose_in = 100; nose_in <= nose_range; nose_in = nose_in + 100)                                           // FOR-NOSE
     {
         //std::cout << "N: " << nose_in;
 
@@ -83,6 +90,23 @@ int main()
 
                             float Xcg = (Xele*G_ele + Xnose*G_nose + Xwing * G_wing + Xmot*G_mot + Xtail*G_tail + Xrud*G_rud)/G_all;
                             //std::cout << "Xcg: " << Xcg << std::endl;
+
+                            
+
+                            // Aerodynamic Constants
+                            float Q=0, rho = 1.225, u = 10.0, v=0.0, w=0.0;                                         // Q = Dynamic pressure, rho mass density, u flow speed
+                            float V = sqrt(pow(u,2)+pow(v,2)+pow(w,2));
+                            float alpha = w/u;                                                                      // rad
+                            float beta = v/u;                                                                       // rad
+                            float cbar = chord;
+                            Q = 1/2*rho*pow(V,2);
+                            
+                            // Find out the Cm
+                            float Cm = 0, Cm_cg_w=0, Cm_ac_w=0, CL_w=0, CD_w=0;
+                            
+                            
+
+
                             tot_count++;
                             float Xac = chord * 0.25;
                             float ss = Xcg - Xac;
